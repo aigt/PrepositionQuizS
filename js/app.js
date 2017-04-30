@@ -3,17 +3,65 @@
 var app = angular.module('app', []);
 
 app.controller('QuizCtrl', function($scope, quizFactory){
-	$scope.questionQuantity = questions.length;
+	$scope.questionsPerQuiz = 20;
+	$scope.quizButtons = [];
 
 	$scope.startQuiz = function(){
+		$scope.startSubQuiz(0,1);
+	};
+
+	$scope.startSubQuiz = function(questionNum, quizNum){
 		$scope.isListMode = false;
 		$scope.questions = [];
+		quizFactory.setQuestionsPerQuiz(questionNum);
+		quizFactory.setCurrentQuiz(quizNum);
 		quizFactory.shuffleQuestions();
 		$scope.correctAnswers = 0;
 		$scope.currentQuiestionN = -1;
 		$scope.inProgress = true;
 		$scope.nextQuestion();
 	};
+
+	$scope.stopQuiz = function(questionNum, quizNum){
+		$scope.correctAnswers = 0;
+		$scope.currentQuiestionN = -1;
+		$scope.inProgress = false;
+	};
+	
+	$scope.restartQuiz = function(questionNum, quizNum){
+		$scope.isListMode = false;
+		$scope.questions = [];
+		$scope.correctAnswers = 0;
+		$scope.currentQuiestionN = -1;
+		quizFactory.shuffleQuestions();
+		$scope.inProgress = true;
+		$scope.nextQuestion();
+	};
+
+	$scope.startForm = function(questionNum, quizNum){
+		$scope.isListMode = false;
+		$scope.correctAnswers = 0;
+		$scope.currentQuiestionN = -1;
+		$scope.inProgress = false;
+	};
+
+	$scope.generateSubQuizButtons = function(questionsPerQuiz){
+		$scope.quizButtons.length = 0;
+		quizFactory.setQuestionsPerQuiz(questionsPerQuiz);
+		const retArray = [];
+		for(let i=1; i<=quizFactory.getQuizesQuantity(); i++){
+			retArray.push({id:i, text:'Start quiz #'+i});
+		}
+		$scope.quizButtons = retArray;
+	};
+
+	$scope.startQuiz = function(){
+		$scope.startSubQuiz(0,1);
+	};
+
+	$scope.getQuestionsQuantityInQuiz = function(){
+		return quizFactory.getQuestionsQuantityInQuiz();
+	}
 
 	$scope.mistake = function(){
 		$scope.isWrongAnswer = true;
@@ -91,9 +139,62 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 });
 
 app.factory('quizFactory', function() {
-	const retQuestions = questions;
+	let retQuestions = questions;
+	let questionsPerQuiz = 0;
+	let currentQuiz = 1;
+
+	let updateQuestions = function(){
+			const totalQuizes = Math.ceil(questions.length / questionsPerQuiz);
+
+			if(questionsPerQuiz <= 0){
+				retQuestions = questions;
+				currentQuiz = 1;
+			}
+			else{
+				if(currentQuiz >= totalQuizes){
+					currentQuiz = totalQuizes;
+					retQuestions = questions.slice(questionsPerQuiz*(currentQuiz-1));
+				}
+				else{
+					retQuestions = questions.slice(questionsPerQuiz*(currentQuiz-1), questionsPerQuiz*currentQuiz);
+				}
+				shuffleQuestions(retQuestions);
+			}
+	};
+
+	let shuffleQuestions = function(){
+		for (let i = retQuestions.length; i; i--) {
+			let j = Math.floor(Math.random() * i);
+			[retQuestions[i - 1], retQuestions[j]] = [retQuestions[j], retQuestions[i - 1]];
+		}
+	};
 
 	return {
+		getQuestionsQuantityInQuiz:function() {
+			return retQuestions.length;
+		},
+
+		getQuizesQuantity:function() {
+			return Math.ceil(questions.length / questionsPerQuiz);
+		},
+
+		getCurrentQuiz:function() {
+			return currentQuiz;
+		},
+
+		setCurrentQuiz:function(num) {
+			currentQuiz = num;
+			updateQuestions();
+		},
+
+		getQuestionsPerQuiz:function() {
+			return questionsPerQuiz;
+		},
+
+		setQuestionsPerQuiz:function(questionsQuantity) {
+			questionsPerQuiz = questionsQuantity;
+			updateQuestions();
+		},
 
 		getQuestion: function(id) {
 			if(id < retQuestions.length) {
@@ -114,11 +215,7 @@ app.factory('quizFactory', function() {
 		},
 
 		shuffleQuestions: function() {
-			for (let i = retQuestions.length; i; i--) {
-				let j = Math.floor(Math.random() * i);
-				[retQuestions[i - 1], retQuestions[j]] = [retQuestions[j], retQuestions[i - 1]];
-			}
+			shuffleQuestions();
 		}
-
 	};
 });
