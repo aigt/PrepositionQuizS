@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Опросник</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        background-color: #525252;
+      }
+
+      .btn.active {                
+        display: none;		
+      }
+
+      .btn span:nth-of-type(1)  {            	
+        display: none;
+      }
+      .btn span:last-child  {            	
+        display: block;		
+      }
+
+      .btn.active span:nth-of-type(1)  {            	
+        display: block;		
+      }
+      .btn.active span:last-child  {            	
+        display: none;			
+      }
+
+      div.div-left {
+          float: left;
+          margin: 0 10px 0 0;
+      }
+
+      .centered-form{
+        margin-top: 60px;
+      }
+
+      .centered-form .panel{
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript">
+      "use strict";
+
+      var questions = [
+
+        //accuse
+        {
+          text:'accuse',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'кого-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }, {
+              text: 'smth',
+              comment: 'в чём-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'in', isCorrect: true },
+                { text: 'about' }
+              ]
+            }
+          ]
+        },
+
+        //decide
+        {
+          text:'decide',
+          afterBe: false,
+          complements: [
+            {
+              text : 'smth',
+              comment: 'что-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'for' },
+                { text: 'about', isCorrect: true },
+                { text: 'on', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //depend
+        {
+          text:'depend',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'on', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //hungry
+        {
+          text:'hungry',
+          afterBe: true,
+          complements: [
+            {
+              text : 'smth',
+              comment: 'в переносном смысле, например к знаниям и тп.',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'for', isCorrect: true },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //insist
+        {
+          text:'insist',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'на чём-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'on', isCorrect: true },
+                { text: 'to' },
+                { text: 'at' },
+                { text: 'for' }
+              ]
+            }
+          ]
+        },
+
+        //interested
+        {
+          text:'interested',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'в чём-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'on' },
+                { text: 'for' },
+                { text: 'with' },
+                { text: 'in', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //introduce
+        {
+          text: 'introduce',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'кого-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'on' },
+                { text: 'with' },
+                { text: 'of' },
+                { text: 'by' },
+                { text: 'about' }
+              ]
+            }, {
+              text: 'smb',
+              comment: 'кому-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'for' },
+                { text: 'with' },
+                { text: 'to', isCorrect: true },
+                { text: 'by' }
+              ]
+            }
+          ]
+        },
+
+        //invite
+        {
+          text: 'invite',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'кого-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'on' },
+                { text: 'with' },
+                { text: 'of' },
+                { text: 'by' },
+                { text: 'about' }
+              ]
+            }, {
+              text: 'smb',
+              comment: 'к кому-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'for' },
+                { text: 'with' },
+                { text: 'to', isCorrect: true },
+                { text: 'by' }
+              ]
+            }
+          ]
+        },
+
+        //involved
+        {
+          text:'involved',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'во что-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'on' },
+                { text: 'with' },
+                { text: 'for' },
+                { text: 'by' },
+                { text: 'in', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //kind
+        {
+          text:'kind',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'к кому-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to', isCorrect: true },
+                { text: 'with' },
+                { text: 'for' },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //know
+        {
+          text:'know',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'о чём-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'of' },
+                { text: 'from' },
+                { text: 'about', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //laugh
+        {
+          text:'laugh',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'над кем-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'at', isCorrect: true },
+                { text: 'over' },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //listen
+        {
+          text:'listen',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'кого-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to', isCorrect: true },
+                { text: 'for' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //look
+        {
+          text:'look',
+          afterBe: false,
+          complements: [
+            {
+              text : 'smb',
+              comment: 'присматривать за кем-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'after', isCorrect: true },
+                { text: 'on' },
+                { text: 'about' },
+                { text: 'of' }
+              ]
+            }, 
+            {
+              text : 'smb/smth',
+              comment: 'на кого-то/что-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'at', isCorrect: true },
+                { text: 'on' },
+                { text: 'of' }
+              ]
+            }, 
+            {
+              text : 'smth',
+              comment: 'искать что-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: 'to' },
+                { text: 'of' },
+                { text: 'through' }
+              ]
+            }, 
+            {
+              text : 'smth',
+              comment: 'с нетерпением ждать чего-то',
+              prepositions:[
+                { text: 'forward to', isCorrect: true },
+                { text: 'forward for' },
+                { text: 'forward of' },
+                { text: 'forward about' }
+              ]
+            }, 
+            {
+              text : 'smth',
+              comment: 'просматривать(газеты, записи и тп.)',
+              prepositions:[
+                { text: 'from' },
+                { text: 'for' },
+                { text: 'into' },
+                { text: 'of' },
+                { text: 'through', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //mad
+        {
+          text:'mad',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'от кого-то/чего-то',
+              prepositions:[
+                { text: 'with' },
+                { text: 'at', isCorrect: true },
+                { text: 'about' },
+                { text: 'of' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //made
+        {
+          text:'made',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'из чего-то (первоначальный продукт сохраняется, присутствует в продукте, изделии)',
+              prepositions:[
+                { text: 'under' },
+                { text: 'of', isCorrect: true },
+                { text: 'from' },
+                { text: 'with' }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'извлекать что-то из чего-то (конечный продукт отличается от первоначального)',
+              prepositions:[
+                { text: 'under' },
+                { text: 'of' },
+                { text: 'from', isCorrect: true },
+                { text: 'with' }
+              ]
+            }
+          ]
+        },
+
+        //married
+        {
+          text:'married',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'на ком-то',
+              prepositions:[
+                { text: 'with' },
+                { text: 'at' },
+                { text: 'to', isCorrect: true },
+                { text: 'of' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //matter
+        {
+          text:'matter',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'для',
+              prepositions:[
+                { text: 'for' },
+                { text: 'about' },
+                { text: 'to', isCorrect: true },
+                { text: 'of' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //matter
+        {
+          text:'the matter',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'что-то происходит с кем-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'about' },
+                { text: 'with', isCorrect: true },
+                { text: 'of' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //multiply
+        {
+          text:'multiply',
+          afterBe: false,
+          complements:[
+            {
+              text : 'this',
+              comment: 'что-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'with' },
+                { text: 'to' },
+                { text: 'of' },
+                { text: 'on' }
+              ]
+            },
+            {
+              text : 'that',
+              comment: 'на что-то',
+              prepositions:[
+                { text: 'by', isCorrect: true },
+                { text: 'with' },
+                { text: 'to' },
+                { text: 'of' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //nice
+        {
+          text:'nice',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'по отношению к кому-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'about' },
+                { text: 'with' },
+                { text: 'to', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //opposed
+        {
+          text:'opposed',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'по отношению к кому-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'from' },
+                { text: 'with' },
+                { text: 'to', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //pay
+        {
+          text:'pay',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'за что-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //patient
+        {
+          text:'patient',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'по отношению к кому-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'from' },
+                { text: 'with', isCorrect: true },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //pleased
+        {
+          text:'pleased',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'from' },
+                { text: 'with', isCorrect: true },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //point
+        {
+          text:'point',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кого-то/что-то',
+              prepositions:[
+                { text: 'in' },
+                { text: 'at', isCorrect: true },
+                { text: 'of' },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //polite
+        {
+          text:'polite',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'с кем-то/чем-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'about' },
+                { text: 'with' },
+                { text: 'to', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //prepared
+        {
+          text:'prepared',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'к чему-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: 'about' },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //protect
+        {
+          text:'protect',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кого-то/что-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'about' },
+                { text: 'with' },
+                { text: 'on' },
+                { text: 'of' }
+              ]
+            },
+            {
+              text : 'smb/smth',
+              comment: 'от кого-то/чего-то',
+              prepositions:[
+                { text: 'over' },
+                { text: 'from', isCorrect: true },
+                { text: 'on' },
+                { text: 'of' }
+              ]
+            }
+          ]
+        },
+
+        //proud
+        {
+          text:'proud',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'about' },
+                { text: 'of', isCorrect: true },
+                { text: 'by' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //qualified
+        {
+          text:'qulified',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'для чего-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: 'to' },
+                { text: 'of' },
+                { text: 'in' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //ready
+        {
+          text:'ready',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'для чего-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'in' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //related
+        {
+          text:'related',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'к чему-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'to', isCorrect: true },
+                { text: 'of' },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //rely
+        {
+          text:'rely',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'на кого-то/что-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'to' },
+                { text: 'of' },
+                { text: 'upon', isCorrect: true },
+                { text: 'on', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //remind
+        {
+          text:'remind',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'кому-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'of' },
+                { text: 'for' },
+                { text: 'on' }
+              ]
+            }, 
+            {
+              text : 'smb/smth',
+              comment: 'кого-то/что-то',
+              prepositions:[
+                
+                { text: 'for' },
+                { text: 'about', isCorrect: true },
+                { text: 'of', isCorrect: true },
+                { text: 'by' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //responsible
+        {
+          text:'responsible',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'за кого-то/что-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: 'about' },
+                { text: 'of' },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //satisfied
+        {
+          text:'satisfied',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: 'by' },
+                { text: 'about' },
+                { text: 'of' },
+                { text: 'with', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //scared
+        {
+          text:'scared',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: 'by', isCorrect: true },
+                { text: 'about' },
+                { text: 'of', isCorrect: true },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //search
+        {
+          text:'search',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кого-то/что-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //separate
+        {
+          text:'separate',
+          afterBe: false,
+          complements:[
+            {
+              text : 'this',
+              comment: 'что-то',
+              prepositions:[
+                { text: 'by' },
+                { text: '-', isCorrect: true },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            },
+            {
+              text : 'that',
+              comment: 'от чего-то',
+              prepositions:[
+                { text: 'by' },
+                { text: 'with' },
+                { text: 'of' },
+                { text: 'from', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //similar
+        {
+          text:'similar',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кому-то/чему-то',
+              prepositions:[
+                { text: 'for' },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'to', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //sorry
+        {
+          text:'sorry',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'о чём-то',
+              prepositions:[
+                { text: 'for' },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about', isCorrect: true },
+                { text: 'to' }
+              ]
+            },
+            {
+              text : 'smb',
+              comment: 'кого-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'to' }
+              ]
+            }
+          ]
+        },
+
+        //speak
+        {
+          text:'speak',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'с кем-то',
+              prepositions:[
+                { text: 'with', isCorrect: true },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'to', isCorrect: true }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'о чём-то',
+              prepositions:[
+                { text: 'for' },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about', isCorrect: true },
+                { text: 'to' }
+              ]
+            }
+          ]
+        },
+
+        //stare
+        {
+          text:'stare',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'на кого-то',
+              prepositions:[
+                { text: 'on' },
+                { text: 'in' },
+                { text: 'of' },
+                { text: 'at', isCorrect: true },
+                { text: 'to' }
+              ]
+            }
+          ]
+        },
+
+        //stop
+        {
+          text:'stop',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'от чего-то',
+              prepositions:[
+                { text: 'for' },
+                { text: 'from', isCorrect: true },
+                { text: 'of' },
+                { text: 'by' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //substruct
+        {
+          text:'substruct',
+          afterBe: false,
+          complements:[
+            {
+              text : 'this',
+              comment: 'что-то',
+              prepositions:[
+                { text: 'by' },
+                { text: '-', isCorrect: true },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            },
+            {
+              text : 'that',
+              comment: 'из чего-то',
+              prepositions:[
+                { text: 'by' },
+                { text: 'with' },
+                { text: 'of' },
+                { text: 'from', isCorrect: true },
+                { text: 'in' }
+              ]
+            }
+          ]
+        },
+
+        //sure
+        {
+          text:'sure',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'в чём-то',
+              prepositions:[
+                { text: 'at' },
+                { text: 'of', isCorrect: true },
+                { text: 'in' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //take care
+        {
+          text:'sure',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'о ком-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'for' },
+                { text: 'of', isCorrect: true },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //talk
+        {
+          text:'talk',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'с кем-то',
+              prepositions:[
+                { text: 'with', isCorrect: true },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'to', isCorrect: true }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'о чём-то',
+              prepositions:[
+                { text: 'for' },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about', isCorrect: true },
+                { text: 'to' }
+              ]
+            }
+          ]
+        },
+
+        //tell
+        {
+          text:'tell',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'с кем-то',
+              prepositions:[
+                { text: 'with' },
+                { text: '-', isCorrect: true },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'to' }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'о чём-то',
+              prepositions:[
+                { text: 'for' },
+                { text: '-' },
+                { text: 'of' },
+                { text: 'about', isCorrect: true },
+                { text: 'to' }
+              ]
+            }
+          ]
+        },
+
+        //terrified
+        {
+          text:'terrified',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: 'by', isCorrect: true },
+                { text: 'about' },
+                { text: 'of', isCorrect: true },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //thank
+        {
+          text:'thank',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb',
+              comment: 'кому-то',
+              prepositions:[
+                { text: 'with' },
+                { text: '-', isCorrect: true },
+                { text: 'of' },
+                { text: 'for' },
+                { text: 'to' }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'за что-то',
+              prepositions:[
+                { text: 'for', isCorrect: true },
+                { text: 'on' },
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'to' }
+              ]
+            }
+          ]
+        },
+
+        //thirsty
+        {
+          text:'thirsty',
+          afterBe: true,
+          complements: [
+            {
+              text : 'smth',
+              comment: 'в переносном смысле, например к знаниям и тп.',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'for', isCorrect: true },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //tired
+        {
+          text:'tired',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: 'by' },
+                { text: 'about' },
+                { text: 'of', isCorrect: true },
+                { text: 'with' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //travel
+        {
+          text:'travel',
+          afterBe: false,
+          complements:[
+            {
+              text : 'somewhere',
+              comment: 'куда-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'in' },
+                { text: 'of' },
+                { text: 'to', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //upset
+        {
+          text:'upset',
+          afterBe: 'any',
+          complements: [
+            {
+              text : 'smb',
+              comment: 'кого-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'to' },
+                { text: 'on' }
+              ]
+            }, 
+            {
+              text : 'smb',
+              comment: 'в ком-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'about' },
+                { text: 'with', isCorrect: true },
+                { text: 'on' },
+                { text: 'at' }
+              ]
+            }, 
+            {
+              text : 'smth',
+              comment: 'чем-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'about', isCorrect: true },
+                { text: 'with' },
+                { text: 'on' },
+                { text: 'at' }
+              ]
+            }
+          ]
+        },
+
+        //wait
+        {
+          text:'wait',
+          afterBe: false,
+          complements: [
+            {
+              text : 'smb/smth',
+              comment: 'кого-то/что-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'for', isCorrect: true },
+                { text: 'about' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //word-class
+        {
+          text:'world-class',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'в чём-то',
+              prepositions:[
+                { text: 'in' },
+                { text: 'of' },
+                { text: 'with' },
+                { text: 'at', isCorrect: true },
+                { text: 'on' }
+              ]
+            }
+          ]
+        },
+
+        //worried
+        {
+          text:'worried',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'о ком-то/чём-то',
+              prepositions:[
+                { text: 'about', isCorrect: true },
+                { text: 'of' },
+                { text: 'with' },
+                { text: 'at' },
+                { text: 'on' }
+              ]
+            }
+          ]
+        }
+
+      ];
+    </script>
+    <script type="text/javascript">
+      "use strict";
+
+      var app = angular.module('app', []);
+
+      app.controller('QuizCtrl', function($scope, quizFactory){
+        $scope.questionQuantity = questions.length;
+
+        $scope.startQuiz = function(){
+          $scope.isListMode = false;
+          $scope.questions = [];
+          quizFactory.shuffleQuestions();
+          $scope.correctAnswers = 0;
+          $scope.currentQuiestionN = -1;
+          $scope.inProgress = true;
+          $scope.nextQuestion();
+        };
+
+        $scope.mistake = function(){
+          $scope.isWrongAnswer = true;
+        };
+
+        $scope.inlineOnlyCorrectAnswers = function(answers){
+          let filteredAnswers = [];
+          answers.forEach(function(element, index, array) {
+            if(element.isCorrect){
+              filteredAnswers.push(element.text);
+            }
+          });
+          return filteredAnswers.join(" / ");
+        };
+
+        $scope.showList = function(){
+          $scope.isListMode = true;
+          $scope.inProgress = false;
+          $scope.questions = questions;
+        };
+
+        $scope.checkAnswers = function(){
+          $('label.ans-preposition-true')
+            .map(function() {
+              return $(this).addClass('active');
+            });
+          $('label.nans-preposition-true')
+            .map(function() {
+              if(($(this).hasClass('active'))){
+                  $(this).removeClass('btn-success');
+                  $(this).addClass('btn-warning');
+                  $scope.isWrongAnswer = true;
+              }
+              return $(this).removeClass('active');
+            });
+
+          if(!$scope.isWrongAnswer && !$scope.isCheckedQuestion){
+            $scope.correctAnswers++;
+          }
+          $scope.isCheckedQuestion = true;
+        };
+
+        $scope.nextQuestion = function(){
+          $('label.nans-preposition-true')
+            .map(function() {
+              if(($(this).hasClass('btn-warning'))){
+                  $(this).removeClass('btn-warning');
+                  $(this).addClass('btn-success');
+              }
+              return $(this).addClass('active');
+            });
+          $('label.ans-preposition-true')
+            .map(function() {
+              return $(this).removeClass('active');
+            });
+            $('label.nans-preposition-false')
+            .map(function() {
+              return $(this).addClass('active');
+            });
+          $('label.ans-preposition-false')
+            .map(function() {
+              return $(this).removeClass('active');
+            });
+
+          $scope.isWrongAnswer = false;
+
+          $scope.currentQuiestionN++;
+          $scope.question = quizFactory.getQuestion($scope.currentQuiestionN);
+          if(!$scope.question){
+            $scope.inProgress = false;
+          }
+
+          $scope.isCheckedQuestion = false;
+        };
+      });
+
+      app.factory('quizFactory', function() {
+        const retQuestions = questions;
+
+        return {
+
+          getQuestion: function(id) {
+            if(id < retQuestions.length) {
+              const question = retQuestions[id];
+
+              //shuffle prepositions in each complement
+              question.complements.forEach(function(compl){
+                for (let i = compl.prepositions.length; i; i--) {
+                  let j = Math.floor(Math.random() * i);
+                  [compl.prepositions[i - 1], compl.prepositions[j]] = [compl.prepositions[j], compl.prepositions[i - 1]];
+                }
+              });
+
+              return question;
+            } else {
+              return false;
+            }
+          },
+
+          shuffleQuestions: function() {
+            for (let i = retQuestions.length; i; i--) {
+              let j = Math.floor(Math.random() * i);
+              [retQuestions[i - 1], retQuestions[j]] = [retQuestions[j], retQuestions[i - 1]];
+            }
+          }
+
+        };
+      });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body ng-controller="QuizCtrl">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Prepositions</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="#" ng-click="startQuiz()">Restart</a></li>
+            <li class=""><a href="#" ng-click="showList()">List of words</a></li>
+            <li><a href="https://github.com/aigt/PrepositionQuiz">App on GitHub</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row centered-form">
+        <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        	<div class="panel panel-default">
+        		<div class="panel-heading" ng-show="inProgress">
+			    		<h3 class="panel-title">Progress: {{correctAnswers}}<sup>correct</sup> / {{currentQuiestionN + 1}}<sup>current</sup> / {{questionQuantity}}<sup>total</sup> </h3>
+			 			</div>
+            <div class="panel-heading" ng-show="isListMode">
+			    		<h3 class="panel-title">List of words</h3>
+			 			</div>
+
+            <div class="panel-body">
+
+              <div ng-show="inProgress">
+
+                <ul class="list-group">
+
+                  <li class="list-group-item">
+                    <h1 class="list-group-item-heading">
+                      <div class="div-left" ng-if="question.afterBe != 'any'">
+                        <div class="div-left" data-toggle="buttons" ng-if="question.afterBe">
+                          <label class="btn btn-success text-success active nans-preposition-true">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              be
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-true">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              be
+                          </label>   
+                        </div>
+                        <div class="div-left" data-toggle="buttons"  ng-if="!question.afterBe">
+                          
+                          <label class="btn btn-danger text-danger active nans-preposition-false">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              be
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-false" ng-click="mistake()">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              be
+                          </label>   
+                        </div>
+                      </div>
+                      {{question.text}}
+                    </h1>
+                  </li>
+
+                  <li class="list-group-item" ng-repeat="complement in question.complements">
+                    <span class="btn-group"  ng-repeat="preposition in complement.prepositions">
+                        <div class="" data-toggle="buttons" ng-if="preposition.isCorrect">
+                          <label class="btn btn-success text-success active nans-preposition-true">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              {{preposition.text}}
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-true">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              {{preposition.text}}
+                          </label>   
+                        </div>
+
+                        <div class="" data-toggle="buttons"  ng-if="!preposition.isCorrect">
+                          
+                          <label class="btn btn-danger text-danger active nans-preposition-false">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              {{preposition.text}}
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-false" ng-click="mistake()">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              {{preposition.text}}
+                          </label>   
+                        </div>
+
+                    </span>
+                    <span>{{complement.text}}</span>
+                    <span ng-show="{{complement.comment !== undefined}}">({{complement.comment}})</span>
+                  </li>
+
+                  <li class="list-group-item">
+                    
+                    <p class="list-group-item-text">
+                      Legend:
+                      <span class="label label-default">"-" - no prepositions</span>
+                      <span class="label label-success">Correct answer</span>
+                      <span class="label label-warning">Missed answer</span>
+                      <span class="label label-danger">Wrong answer</span>
+                    </p>
+                    
+                  </li>
+                </ul>
+
+
+
+                <div>
+                  <button class="btn btn-primary" ng-click="checkAnswers()">Check</button>
+                  <button ng-if="isCheckedQuestion" class="btn btn-primary" ng-click="nextQuestion()">Next</button>
+                </div>
+
+              </div>
+
+              <div ng-show="isListMode">
+                <div class="list-group">
+                  <div class="list-group-item">
+                    Filter words:
+                    <input type="search" ng-model="q" placeholder="filter words..." aria-label="filter words" />
+                  </div>
+                  <div class="list-group-item">
+                    <table class="table table-striped ">
+                      <thead class="">
+                        <tr>
+                          <th width="5em">#</th>
+                          <th width="70em">to be</th>
+                          <th width="150em">word</th>
+                          <th>complements</th>
+                        </tr>
+                      </thead>
+                      <tbody class="">
+                        <tr ng-repeat="question in questions | filter:q as results">
+                          <td scope="row">{{$index + 1}}</td>
+                          <td><span ng-if="question.afterBe">be</span></td>
+                          <td>{{question.text}}</td>
+                          <td>
+                            <ul>
+                              <li ng-repeat="complement in question.complements">
+                                <b>{{inlineOnlyCorrectAnswers(complement.prepositions)}}</b> {{complement.text}} ({{complement.comment}})
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr ng-if="results.length === 0">
+                          <td colspan="4">No results found...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-if="!inProgress">
+                <div ng-if="currentQuiestionN > 0">
+                  <h3 class="">Your result</h3>{{val | number:0}}
+                  <p>{{correctAnswers}} of {{questionQuantity}} ({{correctAnswers*100/questionQuantity | number:1}}%)</p>
+                </div>
+                <button class="btn btn-primary" ng-click="startQuiz()">Start</button>
+              </div>
+
+            </div><!-- /.panel-body -->
+
+        </div><!-- /.panel -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Опросник</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body ng-controller="QuizCtrl">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Prepositions</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="#" ng-click="startQuiz()">Restart</a></li>
+            <li class=""><a href="#" ng-click="showList()">List of words</a></li>
+            <li><a href="https://github.com/aigt/PrepositionQuiz">App on GitHub</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row centered-form">
+        <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        	<div class="panel panel-default">
+        		<div class="panel-heading" ng-show="inProgress">
+			    		<h3 class="panel-title">Progress: {{correctAnswers}}<sup>correct</sup> / {{currentQuiestionN + 1}}<sup>current</sup> / {{questionQuantity}}<sup>total</sup> </h3>
+			 			</div>
+            <div class="panel-heading" ng-show="isListMode">
+			    		<h3 class="panel-title">List of words</h3>
+			 			</div>
+
+            <div class="panel-body">
+
+              <div ng-show="inProgress">
+
+                <ul class="list-group">
+
+                  <li class="list-group-item">
+                    <h1 class="list-group-item-heading">
+                      <div class="div-left" ng-if="question.afterBe != 'any'">
+                        <div class="div-left" data-toggle="buttons" ng-if="question.afterBe">
+                          <label class="btn btn-success text-success active nans-preposition-true">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              be
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-true">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              be
+                          </label>   
+                        </div>
+                        <div class="div-left" data-toggle="buttons"  ng-if="!question.afterBe">
+                          
+                          <label class="btn btn-danger text-danger active nans-preposition-false">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              be
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-false" ng-click="mistake()">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              be
+                          </label>   
+                        </div>
+                      </div>
+                      {{question.text}}
+                    </h1>
+                  </li>
+
+                  <li class="list-group-item" ng-repeat="complement in question.complements">
+                    <span class="btn-group"  ng-repeat="preposition in complement.prepositions">
+                        <div class="" data-toggle="buttons" ng-if="preposition.isCorrect">
+                          <label class="btn btn-success text-success active nans-preposition-true">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              {{preposition.text}}
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-true">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              {{preposition.text}}
+                          </label>   
+                        </div>
+
+                        <div class="" data-toggle="buttons"  ng-if="!preposition.isCorrect">
+                          
+                          <label class="btn btn-danger text-danger active nans-preposition-false">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                              {{preposition.text}}
+                          </label>
+                          <label class="btn btn-default text-default ans-preposition-false" ng-click="mistake()">
+                              <input class="ans-preposition" type="radio" name="options" id="option2" autocomplete="off">
+                              {{preposition.text}}
+                          </label>   
+                        </div>
+
+                    </span>
+                    <span>{{complement.text}}</span>
+                    <span ng-show="{{complement.comment !== undefined}}">({{complement.comment}})</span>
+                  </li>
+
+                  <li class="list-group-item">
+                    
+                    <p class="list-group-item-text">
+                      Legend:
+                      <span class="label label-default">"-" - no prepositions</span>
+                      <span class="label label-success">Correct answer</span>
+                      <span class="label label-warning">Missed answer</span>
+                      <span class="label label-danger">Wrong answer</span>
+                    </p>
+                    
+                  </li>
+                </ul>
+
+
+
+                <div>
+                  <button class="btn btn-primary" ng-click="checkAnswers()">Check</button>
+                  <button ng-if="isCheckedQuestion" class="btn btn-primary" ng-click="nextQuestion()">Next</button>
+                </div>
+
+              </div>
+
+              <div ng-show="isListMode">
+                <div class="list-group">
+                  <div class="list-group-item">
+                    Filter words:
+                    <input type="search" ng-model="q" placeholder="filter words..." aria-label="filter words" />
+                  </div>
+                  <div class="list-group-item">
+                    <table class="table table-striped ">
+                      <thead class="">
+                        <tr>
+                          <th width="5em">#</th>
+                          <th width="70em">to be</th>
+                          <th width="150em">word</th>
+                          <th>complements</th>
+                        </tr>
+                      </thead>
+                      <tbody class="">
+                        <tr ng-repeat="question in questions | filter:q as results">
+                          <td scope="row">{{$index + 1}}</td>
+                          <td><span ng-if="question.afterBe">be</span></td>
+                          <td>{{question.text}}</td>
+                          <td>
+                            <ul>
+                              <li ng-repeat="complement in question.complements">
+                                <b>{{inlineOnlyCorrectAnswers(complement.prepositions)}}</b> {{complement.text}} ({{complement.comment}})
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr ng-if="results.length === 0">
+                          <td colspan="4">No results found...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-if="!inProgress">
+                <div ng-if="currentQuiestionN > 0">
+                  <h3 class="">Your result</h3>{{val | number:0}}
+                  <p>{{correctAnswers}} of {{questionQuantity}} ({{correctAnswers*100/questionQuantity | number:1}}%)</p>
+                </div>
+                <button class="btn btn-primary" ng-click="startQuiz()">Start</button>
+              </div>
+
+            </div><!-- /.panel-body -->
+
+        </div><!-- /.panel -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+  </body>
+</html>
