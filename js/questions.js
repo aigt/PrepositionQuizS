@@ -1050,7 +1050,7 @@ var questions = [
 
   //take care
   {
-    text:'sure',
+    text:'take care',
     afterBe: false,
     complements:[
       {
