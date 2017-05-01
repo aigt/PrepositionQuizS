@@ -764,12 +764,24 @@ var questions = [
       }, 
       {
         text : 'smb/smth',
-        comment: 'кого-то/что-то',
+        comment: 'кого-то/что-то (когда речь о схожести людей, предметов или явлений)',
+        prepositions:[
+          
+          { text: 'for' },
+          { text: 'about' },
+          { text: 'of', isCorrect: true },
+          { text: 'by' },
+          { text: 'on' }
+        ]
+      }, 
+      {
+        text : 'smth',
+        comment: 'что-то (чтобы не забыл, например курицу в духовке)',
         prepositions:[
           
           { text: 'for' },
           { text: 'about', isCorrect: true },
-          { text: 'of', isCorrect: true },
+          { text: 'of' },
           { text: 'by' },
           { text: 'on' }
         ]
@@ -822,11 +834,22 @@ var questions = [
     complements:[
       {
         text : 'smb/smth',
-        comment: 'кем-то/чем-то',
+        comment: 'кем-то/чем-то (which may or may not exist or happen)',
+        prepositions:[
+          { text: 'by' },
+          { text: 'about' },
+          { text: 'of', isCorrect: true },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      },
+      {
+        text : 'smb/smth',
+        comment: 'кем-то/чем-то (which actually happened to me in the past)',
         prepositions:[
           { text: 'by', isCorrect: true },
           { text: 'about' },
-          { text: 'of', isCorrect: true },
+          { text: 'of' },
           { text: 'with' },
           { text: 'on' }
         ]
