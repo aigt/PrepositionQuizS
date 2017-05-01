@@ -1,2 +1,2 @@
 # PrepositionQuiz
-Simple app to study usage of English prepositions
+Simple app to learn a usage of English prepositions
