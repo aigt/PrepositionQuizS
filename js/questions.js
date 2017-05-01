@@ -332,7 +332,7 @@ var questions = [
     complements:[
       {
         text : 'smb',
-        comment: 'на кого-то/что-то',
+        comment: 'с кем-то',
         prepositions:[
           { text: 'of' },
           { text: 'about' },

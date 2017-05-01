@@ -387,7 +387,7 @@
           complements:[
             {
               text : 'smb',
-              comment: 'на кого-то/что-то',
+              comment: 'с кем-то',
               prepositions:[
                 { text: 'of' },
                 { text: 'about' },
@@ -2104,6 +2104,7 @@
           for(let i=1; i<=quizFactory.getQuizesQuantity(); i++){
             retArray.push({id:i, text:'Start quiz #'+i});
           }
+          $scope.questionsPerQuiz = questionsPerQuiz;
           $scope.quizButtons = retArray;
         };
 
@@ -2475,7 +2476,7 @@
                             <tr ng-repeat="answer in wrongAnswers">
                               <td scope="row">{{$index + 1}}</td>
                               <td><span ng-if="answer.afterBe">be</span></td>
-                              <td>{{question.text}}</td>
+                              <td>{{answer.text}}</td>
                               <td>
                                 <ul>
                                   <li ng-repeat="complement in answer.complements">

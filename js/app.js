@@ -56,6 +56,7 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 		for(let i=1; i<=quizFactory.getQuizesQuantity(); i++){
 			retArray.push({id:i, text:'Start quiz #'+i});
 		}
+		$scope.questionsPerQuiz = questionsPerQuiz;
 		$scope.quizButtons = retArray;
 	};
 

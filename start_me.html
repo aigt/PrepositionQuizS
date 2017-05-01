@@ -201,7 +201,7 @@
                             <tr ng-repeat="answer in wrongAnswers">
                               <td scope="row">{{$index + 1}}</td>
                               <td><span ng-if="answer.afterBe">be</span></td>
-                              <td>{{question.text}}</td>
+                              <td>{{answer.text}}</td>
                               <td>
                                 <ul>
                                   <li ng-repeat="complement in answer.complements">
