@@ -246,6 +246,408 @@ var questions = [
     ]
   },
 
+  //appologize
+  {
+    text:'appologize',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'перед кем-то',
+        prepositions:[
+          { text: 'of' },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to', isCorrect: true }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'за что-то',
+        prepositions:[
+          { text: 'about' },
+          { text: 'of' },
+          { text: 'for', isCorrect: true },
+          { text: 'on' },
+          { text: 'at' }
+        ]
+      }
+    ]
+  },
+
+  //apply
+  {
+    text: 'apply',
+    afterBe: false,
+    complements:[
+      {
+        text : 'a place',
+        comment: 'на место',
+        prepositions:[
+          { text: 'of' },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to', isCorrect: true }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'для чего-то',
+        prepositions:[
+          { text: 'about' },
+          { text: 'of' },
+          { text: 'for', isCorrect: true },
+          { text: 'on' },
+          { text: 'at' }
+        ]
+      }
+    ]
+  },
+
+  //approve
+  {
+    text: 'approve',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb/smth',
+        comment: 'кого-то/что-то',
+        prepositions:[
+          { text: 'of', isCorrect: true },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to' }
+        ]
+      }
+    ]
+  },
+
+  //argue
+  {
+    text: 'argue',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'на кого-то/что-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'about' },
+          { text: 'at' },
+          { text: 'on' },
+          { text: 'with', isCorrect: true }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'по поводу чего-то',
+        prepositions:[
+          { text: 'about', isCorrect: true },
+          { text: 'of' },
+          { text: 'for' },
+          { text: 'on' },
+          { text: 'with' }
+        ]
+      }
+    ]
+  },
+
+  //arrive
+  {
+    text: 'arrive',
+    afterBe: false,
+    complements:[
+      {
+        text : 'destination as a point',
+        comment: 'в «маленькие» места: гостиницы, аэропорты, вокзалы, дома и т.д.',
+        prepositions:[
+          { text: 'in' },
+          { text: '-' },
+          { text: 'at', isCorrect: true },
+          { text: 'for' },
+          { text: 'to' }
+        ]
+      },
+      {
+        text : 'destination as a larger area',
+        comment: 'в «крупные» населенные пункты – города, страны, континенты',
+        prepositions:[
+          { text: 'in', isCorrect: true },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to' }
+        ]
+      }
+    ]
+  },
+
+  //ask
+  {
+    text:'ask',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'кого-то',
+        prepositions:[
+          { text: '-', isCorrect: true },
+          { text: 'about' },
+          { text: 'for' },
+          { text: 'on' },
+          { text: 'with' }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'о чём-то',
+        prepositions:[
+          { text: 'about', isCorrect: true },
+          { text: 'by' },
+          { text: 'for' },
+          { text: 'on' },
+          { text: 'with' }
+        ]
+      }
+    ]
+  },
+
+  //aware
+  {
+    text: 'aware',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'что-то',
+        prepositions:[
+          { text: 'of', isCorrect: true },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'about' }
+        ]
+      }
+    ]
+  },
+
+  //bad
+  {
+    text: 'bad',
+    afterBe: true,
+    complements:[
+      {
+        text : '(doing) smth',
+        comment: '(делая) что-то',
+        prepositions:[
+          { text: 'of' },
+          { text: '-' },
+          { text: 'at', isCorrect: true },
+          { text: 'for' },
+          { text: 'about' }
+        ]
+      }
+    ]
+  },
+
+  //believe
+  {
+    text: 'believe',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'во что-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'in', isCorrect: true },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'about' }
+        ]
+      }
+    ]
+  },
+
+  //belong
+  {
+    text: 'belong',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'кому-то',
+        prepositions:[
+          { text: 'of' },
+          { text: '-' },
+          { text: 'to', isCorrect: true },
+          { text: 'for' },
+          { text: 'with' }
+        ]
+      }
+    ]
+  },
+
+  //bored
+  {
+    text: 'bored',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'кому-то',
+        prepositions:[
+          { text: 'on' },
+          { text: '-' },
+          { text: 'about' },
+          { text: 'by', isCorrect: true },
+          { text: 'with', isCorrect: true }
+        ]
+      }
+    ]
+  },
+
+  //borrow
+  {
+    text: 'borrow',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'что-то',
+        prepositions:[
+          { text: 'on' },
+          { text: '-', isCorrect: true },
+          { text: 'about' },
+          { text: 'by' },
+          { text: 'with' }
+        ]
+      },
+      {
+        text : 'smb',
+        comment: 'у кого-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'from', isCorrect: true },
+          { text: 'at' },
+          { text: 'by' },
+          { text: 'with' }
+        ]
+      }
+    ]
+  },
+
+  //busy
+  {
+    text: 'busy',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'чем-то',
+        prepositions:[
+          { text: 'on' },
+          { text: 'in' },
+          { text: 'for' },
+          { text: 'by' },
+          { text: 'with', isCorrect: true }
+        ]
+      }
+    ]
+  },
+
+  //care
+  {
+    text: 'care',
+    afterBe: false,
+    complements:[
+      {
+        text : 'something/someone when they matter to you/have value to you',
+        comment: 'быть не безразличным к кому-то/чему-то',
+        prepositions:[
+          { text: 'on' },
+          { text: 'about', isCorrect: true },
+          { text: 'for' },
+          { text: 'by' },
+          { text: 'of' }
+        ]
+      },
+      {
+        text : 'someone or something if you provide the things they need, especially someone who is young, old, or ill',
+        comment: 'заботиться/любить кого-то',
+        prepositions:[
+          { text: 'on' },
+          { text: 'about' },
+          { text: 'for', isCorrect: true },
+          { text: 'by' },
+          { text: 'of' }
+        ]
+      }
+    ]
+  },
+
+  //clear
+  {
+    text: 'clear',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'кому-то',
+        prepositions:[
+          { text: 'on' },
+          { text: 'for' },
+          { text: 'to', isCorrect: true },
+          { text: '-' }
+        ]
+      }
+    ]
+  },
+
+  //compare
+  {
+    text: 'compare',
+    afterBe: false,
+    complements:[
+      {
+        text : 'this',
+        comment: 'что-то',
+        prepositions:[
+          { text: 'on' },
+          { text: 'for' },
+          { text: 'of' },
+          { text: 'to' },
+          { text: '-', isCorrect: true }
+        ]
+      },
+      {
+        text : 'that (to point out similarities between things)',
+        comment: 'с чем-то (чтобы подчеркнуть различия похожих вещей, стоящих в одном ряду)',
+        prepositions:[
+          { text: 'on' },
+          { text: 'for' },
+          { text: 'of' },
+          { text: 'to' },
+          { text: 'with', isCorrect: true }
+        ]
+      },
+      {
+        text : 'that (when noting both similarities and differences)',
+        comment: 'с чем-то (не похожие предметы, например кожу со слоновой костью)',
+        prepositions:[
+          { text: 'on' },
+          { text: 'for' },
+          { text: 'of' },
+          { text: 'to', isCorrect: true },
+          { text: 'with' }
+        ]
+      }
+    ]
+  },
+
   //decide
   {
     text:'decide',
@@ -276,6 +678,25 @@ var questions = [
           { text: '-' },
           { text: 'to' },
           { text: 'on', isCorrect: true }
+        ]
+      }
+    ]
+  },
+
+  //disapprove
+  {
+    text: 'disapprove',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb/smth',
+        comment: 'кого-то/что-то',
+        prepositions:[
+          { text: 'of', isCorrect: true },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to' }
         ]
       }
     ]
