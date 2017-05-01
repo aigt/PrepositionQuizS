@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Опросник</title>
+    <title>Preposition qiuz</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/angular.min.js"></script>
@@ -181,12 +181,45 @@
 
               <div ng-if="!inProgress">
                 <div ng-if="currentQuiestionN > 0">
-                  <h3 class="">Your result</h3>{{val | number:0}}
-                  <p>{{correctAnswers}} of {{getQuestionsQuantityInQuiz()}} ({{correctAnswers*100/getQuestionsQuantityInQuiz() | number:1}}%)</p>
+                  <h3 class="">Your result</h3>
+                    <div class="list-group">
+                      <div class="list-group-item">
+                        <p>You answered {{correctAnswers}} of {{getQuestionsQuantityInQuiz()}} questions ({{correctAnswers*100/getQuestionsQuantityInQuiz() | number:1}}%)</p>
+                      </div>
+                      <div class="list-group-item" ng-if="wrongAnswers.length !== 0">
+                        <h4 class="">Words to repeat</h4>
+                        <table class="table table-striped">
+                          <thead class="">
+                            <tr>
+                              <th width="5em">#</th>
+                              <th width="70em">to be</th>
+                              <th width="150em">word</th>
+                              <th>complements</th>
+                            </tr>
+                          </thead>
+                          <tbody class="">
+                            <tr ng-repeat="answer in wrongAnswers">
+                              <td scope="row">{{$index + 1}}</td>
+                              <td><span ng-if="answer.afterBe">be</span></td>
+                              <td>{{question.text}}</td>
+                              <td>
+                                <ul>
+                                  <li ng-repeat="complement in answer.complements">
+                                    <b>{{inlineOnlyCorrectAnswers(complement.prepositions)}}</b> {{complement.text}} ({{complement.comment}})
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+
                 </div>
 
                 <button class="btn btn-primary btn-block" ng-click="startQuiz()">Start all {{getTotalQuestionNumber()}} questions</button>
-
+                <div class="margin-top-10"></div>
                 <label for="quiz-quantity-input">Or devide into subquizes with defined number of questions:</label>
                 <div class="input-group">
                   <span class="input-group-addon" id="quiz-quantity-addon1">Questions per quiz:</span>

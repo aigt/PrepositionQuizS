@@ -5,6 +5,7 @@ var app = angular.module('app', []);
 app.controller('QuizCtrl', function($scope, quizFactory){
 	$scope.questionsPerQuiz = 20;
 	$scope.quizButtons = [];
+	$scope.wrongAnswers = [];
 
 	$scope.startQuiz = function(){
 		$scope.startSubQuiz(0,1);
@@ -13,6 +14,7 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 	$scope.startSubQuiz = function(questionNum, quizNum){
 		$scope.isListMode = false;
 		$scope.questions = [];
+		$scope.wrongAnswers = [];
 		quizFactory.setQuestionsPerQuiz(questionNum);
 		quizFactory.setCurrentQuiz(quizNum);
 		quizFactory.shuffleQuestions();
@@ -26,11 +28,13 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 		$scope.correctAnswers = 0;
 		$scope.currentQuiestionN = -1;
 		$scope.inProgress = false;
+		$scope.wrongAnswers = [];
 	};
 	
 	$scope.restartQuiz = function(questionNum, quizNum){
 		$scope.isListMode = false;
 		$scope.questions = [];
+		$scope.wrongAnswers = [];
 		$scope.correctAnswers = 0;
 		$scope.currentQuiestionN = -1;
 		quizFactory.shuffleQuestions();
@@ -129,6 +133,10 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 			.map(function() {
 				return $(this).removeClass('active');
 			});
+
+		if($scope.isWrongAnswer){
+			$scope.wrongAnswers.push($scope.question);
+		}
 
 		$scope.isWrongAnswer = false;
 
