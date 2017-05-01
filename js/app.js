@@ -63,6 +63,10 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 		return quizFactory.getQuestionsQuantityInQuiz();
 	}
 
+	$scope.getTotalQuestionNumber = function(){
+		return quizFactory.getTotalQuestionNumber();
+	}
+
 	$scope.mistake = function(){
 		$scope.isWrongAnswer = true;
 	};
@@ -170,6 +174,10 @@ app.factory('quizFactory', function() {
 	};
 
 	return {
+		getTotalQuestionNumber:function() {
+			return questions.length;
+		},
+
 		getQuestionsQuantityInQuiz:function() {
 			return retQuestions.length;
 		},

@@ -821,7 +821,6 @@
               text : 'smb/smth',
               comment: 'кого-то/что-то (когда речь о схожести людей, предметов или явлений)',
               prepositions:[
-                
                 { text: 'for' },
                 { text: 'about' },
                 { text: 'of', isCorrect: true },
@@ -833,7 +832,6 @@
               text : 'smth',
               comment: 'что-то (чтобы не забыл, например курицу в духовке)',
               prepositions:[
-                
                 { text: 'for' },
                 { text: 'about', isCorrect: true },
                 { text: 'of' },
@@ -1475,6 +1473,10 @@
           return quizFactory.getQuestionsQuantityInQuiz();
         }
 
+        $scope.getTotalQuestionNumber = function(){
+          return quizFactory.getTotalQuestionNumber();
+        }
+
         $scope.mistake = function(){
           $scope.isWrongAnswer = true;
         };
@@ -1582,6 +1584,10 @@
         };
 
         return {
+          getTotalQuestionNumber:function() {
+            return questions.length;
+          },
+
           getQuestionsQuantityInQuiz:function() {
             return retQuestions.length;
           },
@@ -1807,7 +1813,7 @@
                   <p>{{correctAnswers}} of {{getQuestionsQuantityInQuiz()}} ({{correctAnswers*100/getQuestionsQuantityInQuiz() | number:1}}%)</p>
                 </div>
 
-                <button class="btn btn-primary btn-block" ng-click="startQuiz()">Start all questions</button>
+                <button class="btn btn-primary btn-block" ng-click="startQuiz()">Start all {{getTotalQuestionNumber()}} questions</button>
 
                 <label for="quiz-quantity-input">Or devide into subquizes with defined number of questions:</label>
                 <div class="input-group">
