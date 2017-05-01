@@ -57,6 +57,25 @@
 
       var questions = [
 
+        //absent
+        {
+          text:'absent',
+          afterBe: true,
+          complements:[
+            {
+              text : 'somewhere',
+              comment: 'где-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'at' },
+                { text: 'on' },
+                { text: 'in' },
+                { text: 'from', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
         //accuse
         {
           text:'accuse',
@@ -79,6 +98,204 @@
                 { text: 'on' },
                 { text: 'in', isCorrect: true },
                 { text: 'about' }
+              ]
+            }
+          ]
+        },
+
+        //accustomed
+        {
+          text:'accustomed',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'чему-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to', isCorrect: true },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'in' }
+              ]
+            }
+          ]
+        },
+
+        //add
+        {
+          text:'add',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smth',
+              comment: 'что-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'at' },
+                { text: 'on' },
+                { text: 'with' },
+                { text: 'for' }
+              ]
+            }, {
+              text: 'smth',
+              comment: 'к чему-то',
+              prepositions:[
+                { text: 'to', isCorrect: true },
+                { text: 'at' },
+                { text: 'on' },
+                { text: 'with' },
+                { text: 'for' }
+              ]
+            }
+          ]
+        },
+
+        //aquainted
+        {
+          text:'aquainted',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'с кем-то/чем-то',
+              prepositions:[
+                { text: '-' },
+                { text: 'to' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'with', isCorrect: true }
+              ]
+            }
+          ]
+        },
+
+        //admire
+        {
+          text:'admire',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кем-то/чем-то',
+              prepositions:[
+                { text: '-', isCorrect: true },
+                { text: 'about' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'with' }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'за что-то',
+              prepositions:[
+                { text: 'about' },
+                { text: 'by' },
+                { text: 'for', isCorrect: true },
+                { text: 'on' },
+                { text: 'with' }
+              ]
+            }
+          ]
+        },
+
+        //afraid
+        {
+          text:'afraid',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'кого-то/чего-то',
+              prepositions:[
+                { text: 'of', isCorrect: true },
+                { text: 'about' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'with' }
+              ]
+            },
+            {
+              text : 'smb/smth',
+              comment: 'за кого-то/что-то (ему может угражать опасность)',
+              prepositions:[
+                { text: 'about' },
+                { text: 'by' },
+                { text: 'for', isCorrect: true },
+                { text: 'on' },
+                { text: 'with' }
+              ]
+            }
+          ]
+        },
+
+        //agree
+        {
+          text:'agree',
+          afterBe: false,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'с кем-то/чем-то, декларирующим суть соглашения (a person, an opinion or a policy)',
+              prepositions:[
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'with', isCorrect: true }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'c чем-то (по поводу чего-то, сутью дискуссиии)',
+              prepositions:[
+                { text: 'about', isCorrect: true },
+                { text: 'by' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'with' }
+              ]
+            },
+            {
+              text : 'a matter for decision',
+              comment: 'a plan, a date, etc, you decide jointly with others to do something',
+              prepositions:[
+                { text: 'about' },
+                { text: 'by' },
+                { text: 'for' },
+                { text: 'on', isCorrect: true },
+                { text: 'with' }
+              ]
+            }
+          ]
+        },
+
+        //angry
+        {
+          text:'angry',
+          afterBe: true,
+          complements:[
+            {
+              text : 'smb/smth',
+              comment: 'на кого-то/что-то',
+              prepositions:[
+                { text: 'of' },
+                { text: 'about' },
+                { text: 'at', isCorrect: true },
+                { text: 'on' },
+                { text: 'with', isCorrect: true }
+              ]
+            },
+            {
+              text : 'smth',
+              comment: 'по поводу чего-то',
+              prepositions:[
+                { text: 'about', isCorrect: true },
+                { text: 'of' },
+                { text: 'for' },
+                { text: 'on' },
+                { text: 'with' }
               ]
             }
           ]
