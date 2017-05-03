@@ -220,12 +220,12 @@
 
                 <button class="btn btn-primary btn-block" ng-click="startQuiz()">Start all {{getTotalQuestionNumber()}} questions</button>
                 <div class="margin-top-10"></div>
-                <label for="quiz-quantity-input">Or devide into subquizes with defined number of questions:</label>
+                <label for="quiz-quantity-input">Or divide into subquizes with defined number of questions:</label>
                 <div class="input-group">
                   <span class="input-group-addon" id="quiz-quantity-addon1">Questions per quiz:</span>
                   <input type="number" class="form-control" id="quiz-quantity-input" aria-describedby="quiz-quantity-addon1" ng-model="questionsPerQuiz">
                   <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" ng-click="generateSubQuizButtons(questionsPerQuiz)">Devide</button>
+                    <button class="btn btn-primary" type="button" ng-click="generateSubQuizButtons(questionsPerQuiz)">Divide</button>
                   </span>
                 </div>
                 <span role="separator" class="divider"></span>
