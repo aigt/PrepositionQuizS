@@ -497,8 +497,8 @@ var questions = [
     afterBe: true,
     complements:[
       {
-        text : 'smb',
-        comment: 'кому-то',
+        text : 'smb/smth',
+        comment: 'от кого-то/чего-то',
         prepositions:[
           { text: 'on' },
           { text: '-' },
