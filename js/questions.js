@@ -1144,6 +1144,131 @@ var questions = [
     ]
   },
 
+  //engaged
+  {
+    text: 'engaged',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'с кем-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'at' },
+          { text: 'to', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //equal
+  {
+    text: 'equal',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'чему-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'at' },
+          { text: 'to', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //escape
+  {
+    text: 'escape',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'от чего-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'by' },
+          { text: 'from', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //excited
+  {
+    text: 'excited',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'по поводу чего-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'by' },
+          { text: 'about', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //excuse
+  {
+    text: 'excuse',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'кого-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'at' },
+          { text: 'by' },
+          { text: '-', isCorrect: true },
+          { text: 'on' }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'за что-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'at' },
+          { text: 'about' },
+          { text: 'for', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //exhausted
+  {
+    text: 'exhausted',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'от чего-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'by' },
+          { text: 'from', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
   //hungry
   {
     text:'hungry',
@@ -1158,6 +1283,229 @@ var questions = [
           { text: 'for', isCorrect: true },
           { text: 'with' },
           { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //familiar
+  {
+    text:'familiar',
+    afterBe: true,
+    complements: [
+      {
+        text : 'smb',
+        comment: 'с кем-то',
+        prepositions:[
+          { text: '-' },
+          { text: 'to' },
+          { text: 'about' },
+          { text: 'with', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //forgove
+  {
+    text:'forgive',
+    afterBe: false,
+    complements: [
+      {
+        text : 'smb',
+        comment: 'кого-то',
+        prepositions:[
+          { text: '-', isCorrect: true },
+          { text: 'to' },
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'за что-то',
+        prepositions:[
+          { text: 'for', isCorrect: true },
+          { text: 'of' },
+          { text: 'about' },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //friendly
+  {
+    text:'friendly',
+    afterBe: true,
+    complements: [
+      {
+        text : 'smb (behave in a friendly manner toward someone. You do not need to be acquainted with the person.)',
+        comment: 'с кем-то (вести себя дружелюбно с кем-то. Тебе нет необходимости знать этого человека)',
+        prepositions:[
+          { text: 'for' },
+          { text: 'to', isCorrect: true },
+          { text: 'about' },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      },
+      {
+        text : 'smb (have a friendly relationship with someone)',
+        comment: 'с кем-то (иметь дружеские взаимоотношения с кем-то)',
+        prepositions:[
+          { text: 'for' },
+          { text: 'to' },
+          { text: 'about' },
+          { text: 'with', isCorrect: true },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //frightened
+  {
+    text:'frightened',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smb/smth (which may or may not exist or happen)',
+        comment: 'кем-то/чем-то (что могло или не могло существовать или произойти)',
+        prepositions:[
+          { text: 'by' },
+          { text: 'about' },
+          { text: 'of', isCorrect: true },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      },
+      {
+        text : 'smb/smth (which actually happened to subject in the past)',
+        comment: 'кем-то/чем-то (реально случившимся для субъекта в прошлом)',
+        prepositions:[
+          { text: 'by', isCorrect: true },
+          { text: 'about' },
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //full
+  {
+    text:'full',
+    afterBe: true,
+    complements: [
+      {
+        text : 'smth',
+        comment: 'чего-то',
+        prepositions:[
+          { text: 'by' },
+          { text: 'to' },
+          { text: 'of', isCorrect: true },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //get rid
+  {
+    text:'get rid',
+    afterBe: false,
+    complements: [
+      {
+        text : 'smth',
+        comment: 'от чего-то',
+        prepositions:[
+          { text: 'from' },
+          { text: '-' },
+          { text: 'of', isCorrect: true },
+          { text: 'with' },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //gone
+  {
+    text:'gone',
+    afterBe: true,
+    complements: [
+      {
+        text : 'somewhere',
+        comment: 'откуда-то',
+        prepositions:[
+          { text: 'from', isCorrect: true },
+          { text: '-' },
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'by' }
+        ]
+      }
+    ]
+  },
+
+  //good
+  {
+    text:'good',
+    afterBe: true,
+    complements: [
+      {
+        text : 'smth',
+        comment: 'для чего-то',
+        prepositions:[
+          { text: 'for', isCorrect: true },
+          { text: '-' },
+          { text: 'at' },
+          { text: 'with' },
+          { text: 'by' }
+        ]
+      }
+    ]
+  },
+
+  //graduate
+  {
+    text:'graduate',
+    afterBe: false,
+    complements: [
+      {
+        text : 'somewhere',
+        comment: 'откуда-то',
+        prepositions:[
+          { text: 'from', isCorrect: true },
+          { text: '-' },
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'by' }
+        ]
+      }
+    ]
+  },
+
+  //happen
+  {
+    text:'happen',
+    afterBe: false,
+    complements: [
+      {
+        text : 'smb',
+        comment: 'с кем-то',
+        prepositions:[
+          { text: 'to', isCorrect: true },
+          { text: 'on' },
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'by' }
         ]
       }
     ]
@@ -1911,8 +2259,8 @@ var questions = [
     afterBe: true,
     complements:[
       {
-        text : 'smb/smth',
-        comment: 'кем-то/чем-то (which may or may not exist or happen)',
+        text : 'smb/smth (which may or may not exist or happen)',
+        comment: 'кем-то/чем-то (что могло или не могло существовать или произойти)',
         prepositions:[
           { text: 'by' },
           { text: 'about' },
@@ -1922,8 +2270,8 @@ var questions = [
         ]
       },
       {
-        text : 'smb/smth',
-        comment: 'кем-то/чем-то (which actually happened to me in the past)',
+        text : 'smb/smth (which actually happened to subject in the past)',
+        comment: 'кем-то/чем-то (реально случившимся для субъекта в прошлом)',
         prepositions:[
           { text: 'by', isCorrect: true },
           { text: 'about' },
@@ -2143,6 +2491,25 @@ var questions = [
           { text: 'at' },
           { text: 'of', isCorrect: true },
           { text: 'in' },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //suffer
+  {
+    text:'suffer',
+    afterBe: true,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'от чего-то',
+        prepositions:[
+          { text: 'at' },
+          { text: 'of' },
+          { text: 'from', isCorrect: true },
+          { text: 'with' },
           { text: 'on' }
         ]
       }
