@@ -1269,25 +1269,6 @@ var questions = [
     ]
   },
 
-  //hungry
-  {
-    text:'hungry',
-    afterBe: true,
-    complements: [
-      {
-        text : 'smth',
-        comment: 'в переносном смысле, например к знаниям и тп.',
-        prepositions:[
-          { text: '-' },
-          { text: 'to' },
-          { text: 'for', isCorrect: true },
-          { text: 'with' },
-          { text: 'on' }
-        ]
-      }
-    ]
-  },
-
   //familiar
   {
     text:'familiar',
@@ -1506,6 +1487,145 @@ var questions = [
           { text: 'of' },
           { text: 'with' },
           { text: 'by' }
+        ]
+      }
+    ]
+  },
+
+  //hear
+  {
+    text:'hear',
+    afterBe: false,
+    complements: [
+      {
+        text : 'smb/smth = you have heard the news about smb/smth',
+        comment: 'о ком-то/чём-то (в значении слышал ли ты новости о ком-то/чём-то)',
+        prepositions:[
+          { text: 'about', isCorrect: true },
+          { text: 'on' },
+          { text: 'of' },
+          { text: 'for' },
+          { text: 'at' }
+        ]
+      },
+      {
+        text : 'smb/smth = you know who/what smb/smth is',
+        comment: 'о ком-то/чём-то (в значении ты знаешь кого-то/что-то)',
+        prepositions:[
+          { text: 'about' },
+          { text: 'on' },
+          { text: 'of', isCorrect: true },
+          { text: 'for' },
+          { text: '-' }
+        ]
+      },
+      {
+        text : 'smb',
+        comment: 'от кого-то',
+        prepositions:[
+          { text: 'from', isCorrect: true },
+          { text: 'by' },
+          { text: 'of' },
+          { text: 'for' },
+          { text: 'about' }
+        ]
+      }
+    ]
+  },
+
+  //help
+  {
+    text: 'help',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smb',
+        comment: 'кому-то',
+        prepositions:[
+          { text: 'of' },
+          { text: '-', isCorrect: true },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to' }
+        ]
+      },
+      {
+        text : 'smth',
+        comment: 'с чем-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with', isCorrect: true },
+          { text: 'at' },
+          { text: 'in' },
+          { text: 'to' }
+        ]
+      }
+    ]
+  },
+
+  //hide
+  {
+    text: 'hide',
+    afterBe: false,
+    complements:[
+      {
+        text : 'smth',
+        comment: 'что-то',
+        prepositions:[
+          { text: 'of' },
+          { text: '-', isCorrect: true },
+          { text: 'at' },
+          { text: 'for' },
+          { text: 'to' }
+        ]
+      },
+      {
+        text : 'smb',
+        comment: 'от кого-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'with' },
+          { text: 'from', isCorrect: true },
+          { text: '-' },
+          { text: 'out' }
+        ]
+      }
+    ]
+  },
+
+  //hope
+  {
+    text:'hope',
+    afterBe: false,
+    complements: [
+      {
+        text : 'smth',
+        comment: 'на что-то',
+        prepositions:[
+          { text: 'of' },
+          { text: 'to' },
+          { text: 'for', isCorrect: true },
+          { text: 'about' },
+          { text: 'on' }
+        ]
+      }
+    ]
+  },
+
+  //hungry
+  {
+    text:'hungry',
+    afterBe: true,
+    complements: [
+      {
+        text : 'smth',
+        comment: 'в переносном смысле, например к знаниям и тп.',
+        prepositions:[
+          { text: '-' },
+          { text: 'to' },
+          { text: 'for', isCorrect: true },
+          { text: 'with' },
+          { text: 'on' }
         ]
       }
     ]
