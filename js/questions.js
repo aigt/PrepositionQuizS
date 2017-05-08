@@ -987,7 +987,7 @@ var questions = [
         text : 'smb/smth',
         comment: 'в ком-то/чём-то',
         prepositions:[
-          { text: 'of' },
+          { text: 'with' },
           { text: 'in', isCorrect: true },
           { text: 'by' },
           { text: 'about' },
