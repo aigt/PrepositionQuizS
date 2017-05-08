@@ -2,7 +2,7 @@
 
 var app = angular.module('app', []);
 
-app.controller('QuizCtrl', function($scope, quizFactory){
+app.controller('QuizCtrl', ['$scope', 'quizFactory', function($scope, quizFactory){
 	$scope.questionsPerQuiz = 20;
 	$scope.quizButtons = [];
 	$scope.wrongAnswers = [];
@@ -149,7 +149,7 @@ app.controller('QuizCtrl', function($scope, quizFactory){
 
 		$scope.isCheckedQuestion = false;
 	};
-});
+}]);
 
 app.factory('quizFactory', function() {
 	let retQuestions = questions;
@@ -176,9 +176,14 @@ app.factory('quizFactory', function() {
 	};
 
 	let shuffleQuestions = function(){
+		let x;
 		for (let i = retQuestions.length; i; i--) {
 			let j = Math.floor(Math.random() * i);
-			[retQuestions[i - 1], retQuestions[j]] = [retQuestions[j], retQuestions[i - 1]];
+			// IE doesn't support
+			// [retQuestions[i - 1], retQuestions[j]] = [retQuestions[j], retQuestions[i - 1]];
+			x = retQuestions[i - 1];
+			retQuestions[i - 1] = retQuestions[j];
+			retQuestions[j] = x;
 		}
 	};
 
@@ -218,10 +223,15 @@ app.factory('quizFactory', function() {
 				const question = retQuestions[id];
 
 				//shuffle prepositions in each complement
+				let x;
 				question.complements.forEach(function(compl){
 					for (let i = compl.prepositions.length; i; i--) {
 						let j = Math.floor(Math.random() * i);
-						[compl.prepositions[i - 1], compl.prepositions[j]] = [compl.prepositions[j], compl.prepositions[i - 1]];
+						// IE doesn't support
+						// [compl.prepositions[i - 1], compl.prepositions[j]] = [compl.prepositions[j], compl.prepositions[i - 1]];
+						x = compl.prepositions[i - 1];
+						compl.prepositions[i - 1] = compl.prepositions[j];
+						compl.prepositions[j] = x;
 					}
 				});
 
