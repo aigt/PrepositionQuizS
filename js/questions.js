@@ -859,6 +859,7 @@ var questions = [
       },
       {
         text : 'smth',
+        comment: 'в чём-то',
         prepositions:[
           { text: 'about' },
           { text: 'by' },
@@ -888,6 +889,7 @@ var questions = [
       },
       {
         text : 'smth',
+        comment: 'в чём-то',
         prepositions:[
           { text: 'about' },
           { text: 'by' },
