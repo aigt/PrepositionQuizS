@@ -691,7 +691,7 @@ var questions = [
           { text: 'from' },
           { text: 'with' },
           { text: 'by' },
-          { text: 'of' }
+          { text: '-' }
         ]
       }
     ]
